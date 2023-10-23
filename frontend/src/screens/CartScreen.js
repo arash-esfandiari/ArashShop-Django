@@ -16,7 +16,8 @@ function CartScreen() {
     const cart = useSelector(state => state.cart)
     const { cartItems } = cart
 
-
+    const userLogin = useSelector(state => state.userLogin)
+    const { userInfo } = userLogin
 
     useEffect(() => {
         if (id) {
@@ -29,7 +30,11 @@ function CartScreen() {
     }
 
     const checkoutHandler = () => {
-        navigate('/shipping')
+        if (!userInfo) {
+            navigate('/login')
+        } else {
+            navigate('/shipping')
+        }
     }
 
     return (
