@@ -98,7 +98,6 @@ def createProductReview(request, pk):
     product = Product.objects.get(_id=pk)
     data = request.data
     
-    print('\n\n\n\n\n\n\n\n\n',request, data, '\n\n\n\n\n\n\n\n\n\n')
     
     #1 - Review already exists
     alreadyExists = product.review_set.filter(user=user).exists()

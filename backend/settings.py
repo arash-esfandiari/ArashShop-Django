@@ -10,11 +10,13 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
+import os
+from datetime import timedelta
 from pathlib import Path
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-import os
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -40,8 +42,9 @@ INSTALLED_APPS = [
     
     'rest_framework',
     'corsheaders',
-    'base.apps.BaseConfig',
     'storages',
+    
+    'base.apps.BaseConfig',
 ]
 
 REST_FRAMEWORK = {
@@ -50,7 +53,6 @@ REST_FRAMEWORK = {
     )
 }
 
-from datetime import timedelta
 
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(days=30),
@@ -107,19 +109,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',
-    
-    "django.middleware.security.SecurityMiddleware",
-    "whitenoise.middleware.WhiteNoiseMiddleware",
-
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
-]
 
 ROOT_URLCONF = 'backend.urls'
 
@@ -159,7 +148,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'Daniameli',
         'USER': 'arashesfandiari',
-        'PASSWORD': os.environ.get('DB_PASS'),
+        # 'PASSWORD': os.environ.get('DB_PASS'),
+        'PASSWORD': 'aR119206',
         'HOST': 'arashshop-identifier.crkxmnq5alap.us-east-2.rds.amazonaws.com',
         'PORT': '5432',
     }
@@ -204,7 +194,6 @@ STATIC_URL = 'static/'
 MEDIA_URL = '/images/'
 
 STATICFILES_DIRS = [
-    BASE_DIR / 'frontend/build',
     BASE_DIR / 'static',
     BASE_DIR / 'frontend/build/static',
 ]
@@ -221,10 +210,13 @@ CORS_ALLOW_ALL_ORIGINS = True
 AWS_QUERYSTRING_AUTH = False
 DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
 
-AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID'),
-AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY'),
+# AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+# AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
 
-AWS_STORAGE_BUCKET_NAME = 'daniameli-bucket'
+AWS_ACCESS_KEY_ID = 'AKIASGCXKRJV2KIZ3ZUI'
+AWS_SECRET_ACCESS_KEY = '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'
+
+AWS_STORAGE_BUCKET_NAME = 'arashshop-bucket'
 
 
 if os.getcwd() == '/app': 
